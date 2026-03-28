@@ -77,13 +77,14 @@ Execution halts when the `halted` flag is set, which is triggered by the `OP_SYS
 All instructions are exactly 16 bits wide. The top 4 bits always encode the opcode. The remaining 12 bits are interpreted differently depending on the instruction format.
 
 ```
-R-Type   [ opcode 4 | rd 4 | rs1 4 | rs2 4 ]
-I-Type   [ opcode 4 | rd 4 | rs1 4 | imm 4 ]
-S-Type   [ opcode 4 | rs1 4 | rs2 4 | imm 4 ]
-B-Type   [ opcode 4 | rs1 4 | rs2 4 | imm 4 ]
-J-Type   [ opcode 4 | rd 4 | imm 8        ]
-U-Type   [ opcode 4 | rd 4 | imm 8        ]
-SYS      [ opcode 4 | imm 12              ]
+(MSB)                                     (LSB)
+R-Type   [  rs2 4  |  rs1 4  |  rd 4   | opcode 4 ]
+I-Type   [  imm 4  |  rs1 4  |  rd 4   | opcode 4 ]
+S-Type   [  imm 4  |  rs2 4  |  rs1 4  | opcode 4 ]
+B-Type   [  imm 4  |  rs2 4  |  rs1 4  | opcode 4 ]
+J-Type   [       imm 8       |  rd 4   | opcode 4 ]
+U-Type   [       imm 8       |  rd 4   | opcode 4 ]
+SYS      [             imm 12          | opcode 4 ]
 ```
 
 Immediate values are sign-extended where required (see `sign_extend` in `operations.h`).
@@ -102,12 +103,12 @@ Immediate values are sign-extended where required (see `sign_extend` in `operati
 | 7      | 0x7 | I      | LB       | rd = mem[rs1 + sign_extend(imm, 4)] (8-bit load)  |
 | 8      | 0x8 | I      | JALR     | rd = PC+2; PC = rs1 + sign_extend(imm, 4)         |
 | 9      | 0x9 | S      | SW       | mem[rs1 + sign_extend(imm, 4)] = rs2 (16-bit)     |
-| 10     | 0xA | S      | SB       | mem[rs1 + sign_extend(imm, 4)] = rs2 (8-bit)      |
-| 11     | 0xB | B      | BEQ      | if (rs1 == rs2) PC += sign_extend(imm, 4)         |
-| 12     | 0xC | B      | BNE      | if (rs1 != rs2) PC += sign_extend(imm, 4)         |
-| 13     | 0xD | J      | JAL      | rd = PC+2; PC += sign_extend(imm, 8)              |
-| 14     | 0xE | U      | LUI      | rd = sign_extend(imm, 8) << 8                     |
-| 15     | 0xF | SYS    | SYS      | System call / halt (imm encodes the call number)  |
+| A      | 0xA | S      | SB       | mem[rs1 + sign_extend(imm, 4)] = rs2 (8-bit)      |
+| B      | 0xB | B      | BEQ      | if (rs1 == rs2) PC += sign_extend(imm, 4)         |
+| C      | 0xC | B      | BNE      | if (rs1 != rs2) PC += sign_extend(imm, 4)         |
+| D      | 0xD | J      | JAL      | rd = PC+2; PC += sign_extend(imm, 8)              |
+| E      | 0xE | U      | LUI      | rd = sign_extend(imm, 8) << 8                     |
+| F      | 0xF | SYS    | SYS      | System calls                                      |
 
 ---
 
