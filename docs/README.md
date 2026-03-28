@@ -77,7 +77,7 @@ Execution halts when the `halted` flag is set, which is triggered by the `OP_SYS
 All instructions are exactly 16 bits wide. The top 4 bits always encode the opcode. The remaining 12 bits are interpreted differently depending on the instruction format.
 
 ```
-(MSB)                                     (LSB)
+            (MSB)                         (LSB)
 R-Type   [  rs2 4  |  rs1 4  |  rd 4   | opcode 4 ]
 I-Type   [  imm 4  |  rs1 4  |  rd 4   | opcode 4 ]
 S-Type   [  imm 4  |  rs2 4  |  rs1 4  | opcode 4 ]
