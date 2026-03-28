@@ -21,7 +21,6 @@ A lightweight, educational CPU simulator built in C, inspired by the RISC-V arch
   - [Running](#running)
 - [API Reference](#api-reference)
 - [Inspiration](#inspiration)
-- [License](#license)
 
 ---
 
