@@ -134,7 +134,7 @@ Notes:
 
 ## Examples
 
-- Encoding example (R-Type): `ADD x3, x1, x2`
+- Encoding example (R-Type): `ADD r3, r1, r2`
 
   rd = 3, rs1 = 1, rs2 = 2, opcode = 0x0
 
@@ -145,7 +145,4 @@ Notes:
 ## See also
 
 - `cpu.h` — source of truth for the `Opcode` enum and comment describing formats.
-
 ---
-
-Generated for the custom-cpu-emulator repository.
