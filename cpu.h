@@ -5,16 +5,21 @@
 #define MEMORY_SIZE 65536 // 64KB of memory for the 16bit CPU
 
 typedef struct {
-    uint16_t PC; // Program counter, used to keep track of the current instruction address
-    uint16_t regs[16]; // 16 general-purpose registers, each 16 bits wide
-    
+    uint16_t PC; // Program counter, used to keep track of the current instruction address, (PC - Program Counter)
+    uint16_t regs[16]; // 16 general-purpose registers, each 16 bits wide, (RF - Register File)
+    Control control; // Control signals for the current instruction, used to determine the operation to perform and how to manipulate the CPU state.
     // Memory is represented as an array of bytes, but instructions and data are accessed in 16-bit chunks.
-    uint8_t memory[MEMORY_SIZE];
+    uint8_t memory[MEMORY_SIZE]; // 64KB of memory, byte-addressable, (MF - Memory File)
 
     // Control signals
     bool is_execute_phase;  // false = fetch, true = execute
     bool halted;            // To stop the loop
 } CPU16;
+
+typedef struct {
+    uint8_t opcode; // [0:3] Opcode (4 bits)
+    uint16_t instruction; // The full 16-bit instruction, used for decoding the operands and immediate values.
+} Control;
 
 /*  Instruction Opcodes 
     opcodes are 4 bits, allowing for 16 unique instructions. The instruction formats are as follow:
