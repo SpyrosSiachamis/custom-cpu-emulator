@@ -1,6 +1,6 @@
 # RISC-V 16-bit CPU Simulator
 
-A lightweight, educational CPU simulator built in C, inspired by the RISC-V architecture and instruction set. This project implements a custom 16-bit variant of the RISC design philosophy, featuring a reduced instruction set, multiple instruction formats, and a complete fetch-execute pipeline.
+A lightweight, educational CPU simulator built in C, inspired by the RISC-V architecture and instruction set. This project implements a custom 16-bit variant of the RISC design philosophy, featuring a reduced instruction set, multiple instruction formats, and a complete fetch-execute pipeline. This project is early in its implementation and currently does not run
 
 ---
 
